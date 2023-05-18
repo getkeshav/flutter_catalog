@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
         child: SingleChildScrollView(
           // allows screen to scroll so that bottom overflow error doesnt occur when widgets become of higher size
           child: Form(
-            key: _formKey,
+            key: _formKey, // applied to both All TextFormField
             child: Column(
               //column has vertical as main axis
               children: [

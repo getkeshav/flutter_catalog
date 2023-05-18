@@ -21,8 +21,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute:
-          "/login", //this is the 1st route we want to show on screen when app opens
+          "/home", //this is the 1st route we want to show on screen when app opens
       routes: {
         "/": (context) => LoginPage(), //by default initial route is "/"
         MyRoutes.homeRoute: (context) => HomePage(),
