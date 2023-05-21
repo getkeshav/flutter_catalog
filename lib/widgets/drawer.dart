@@ -24,15 +24,25 @@ class MyDrawer extends StatelessWidget {
                 )),
             ListTile(
               leading: Icon(CupertinoIcons.home, color: Colors.white),
-              title: Text("Home",style: TextStyle(color: Colors.white, fontSize: 15), ),
+              title: Text(
+                "Home",
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
             ),
             ListTile(
-              leading: Icon(CupertinoIcons.profile_circled, color: Colors.white),
-              title: Text("Profile",style: TextStyle(color: Colors.white, fontSize: 15), ),
+              leading:
+                  Icon(CupertinoIcons.profile_circled, color: Colors.white),
+              title: Text(
+                "Profile",
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
             ),
-             ListTile(
+            ListTile(
               leading: Icon(CupertinoIcons.mail, color: Colors.white),
-              title: Text("Mail",style: TextStyle(color: Colors.white, fontSize: 15), ),
+              title: Text(
+                "Mail",
+                style: TextStyle(color: Colors.white, fontSize: 15),
+              ),
             )
           ],
         ),
