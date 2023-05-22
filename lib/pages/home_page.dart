@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_application_1/models/catalog.dart';
 import 'package:flutter_application_1/widgets/themes.dart';
 import 'dart:convert';
-import '../widgets/drawer.dart';
-import '../widgets/item_widget.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../widgets/home_widgets/catalog_header.dart';
+import '../widgets/home_widgets/catalog_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -42,52 +43,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+        backgroundColor: MyTheme.creamColor,
         body: Container(
-      padding: Vx.m32,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Catalogheader(),
-          if(CatalogModel.items!=null && CatalogModel.items.isNotEmpty)
-          CatalogList()
-          else
-          Center(child: CircularProgressIndicator(),)
-        ],
-      ),
-    ));
-  }
-}
-class Catalogheader extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          "Catalog App".text.xl5.bold.color(MyTheme.darkBluishColor).make(),
-          "Trending Products".text.xl2.make(),
-        ],
-      );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(itemBuilder: (context,index){
-      final catalog = CatalogModel.items[index];
-      return CatalogItem(catalog:catalog);
-    });
-  }
-}
-
-class CatalogItem extends StatelessWidget {
-  final catalog;
-
-  const CatalogItem({super.key, required this.catalog}):assert (catalog!=null); //assert gives warning in debugger if this thing gets null
-  @override
-  Widget build(BuildContext context) {
-    return VxBox(child: Row(children: [Image.network(catalog.image)],)).white.square(100).make().py16();
+          padding: Vx.m32,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Catalogheader(),
+              if (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
+                CatalogList().py16().expand()
+              else
+                CircularProgressIndicator().centered().expand(),
+            ],
+          ),
+        ));
   }
 }
