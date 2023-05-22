@@ -19,7 +19,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   loadData() async {
-    await Future.delayed(Duration(seconds: 2)); // it'll take some time to fetch the data from json file so we will wait till 2 sec and put loading icon at that place
+    await Future.delayed(Duration(
+        seconds:
+            2)); // it'll take some time to fetch the data from json file so we will wait till 2 sec and put loading icon at that place
     final catalogJson = await rootBundle.loadString(
         "assets/files/catalog.json"); // it'll take some time(as loadstring is a future widget) to load data from json file so await is there
     final decodedData = jsonDecode(
@@ -36,7 +38,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Catalog App"),
@@ -44,12 +46,41 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: (CatalogModel.items != null && CatalogModel.items.isNotEmpty)
-            ? ListView.builder(
-                itemCount: CatalogModel.items.length,
-                itemBuilder: (context, index) => ItemWidget(
-                  item: CatalogModel.items[index],
-                ),
-              )
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16),
+                itemBuilder: (context, index) {
+                  final item = CatalogModel.items[index];
+                  return Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      clipBehavior: Clip.antiAlias,
+                      child: GridTile(
+                        header: Container(
+                          child: Text(
+                            item.name,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                        child: Image.network(item.image),
+                        footer: Container(
+                          child: Text(
+                            item.name,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ));
+                })
             : Center(
                 child: CircularProgressIndicator(),
               ),
