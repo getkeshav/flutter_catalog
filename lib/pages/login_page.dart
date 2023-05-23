@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/home_page.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../utils/routes.dart';
 
@@ -12,28 +13,28 @@ class _LoginPageState extends State<LoginPage> {
   String name = "";
   bool changeButton = false;
   final _formKey = GlobalKey<FormState>();
- 
-  moveToHome(BuildContext context) async {
-     if(_formKey.currentState!.validate()) //loginpage wil only go to homepage if all condtions are validated
-  {
-    setState(() {
-      changeButton =
-          true; // change button becomes true on ontap and setstate is called again
-    });
-    await Future.delayed(
-        Duration(seconds: 1)); // wait for 1 second after ontap is executed
-    await Navigator.pushNamed(context, MyRoutes.homeRoute);
-    setState(() {
-      changeButton = false;
-   });
-  }
-  }
 
+  moveToHome(BuildContext context) async {
+    if (_formKey.currentState!
+        .validate()) //loginpage wil only go to homepage if all condtions are validated
+    {
+      setState(() {
+        changeButton =
+            true; // change button becomes true on ontap and setstate is called again
+      });
+      await Future.delayed(
+          Duration(seconds: 1)); // wait for 1 second after ontap is executed
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        changeButton = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: Colors.white,
+        color: context.canvasColor,
         child: SingleChildScrollView(
           // allows screen to scroll so that bottom overflow error doesnt occur when widgets become of higher size
           child: Form(
@@ -52,11 +53,14 @@ class _LoginPageState extends State<LoginPage> {
                 // SizedBox(
                 //   height: 20,
                 // ),
-                Text(
-                  "Welcome $name",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
+                Padding(
+                  padding: const EdgeInsets.only(top:8),
+                  child: Text(
+                    "Welcome $name",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                    ),
                   ),
                 ),
                 Padding(
@@ -70,11 +74,10 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Username",
                       ),
                       validator: (value) {
-                       if(value!.isEmpty)
-                       {
-                        return "Username cannot be empty";
-                       }
-                       return null; //means there is no error in value
+                        if (value!.isEmpty) {
+                          return "Username cannot be empty";
+                        }
+                        return null; //means there is no error in value
                       },
                       onChanged: (value) {
                         name = value;
@@ -88,15 +91,13 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Password",
                       ),
                       validator: (value) {
-                       if(value!.isEmpty)
-                       {
-                        return "Password cannot be empty";
-                       }
-                      if(value.length<6)
-                      {
-                        return "Password Length should be atleast 6  ";
-                      }
-                       return null; //means there is no error in value
+                        if (value!.isEmpty) {
+                          return "Password cannot be empty";
+                        }
+                        if (value.length < 6) {
+                          return "Password Length should be atleast 6  ";
+                        }
+                        return null; //means there is no error in value
                       },
                     ),
                     SizedBox(
@@ -104,14 +105,14 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Material(
                       //ancestor  of InkWell should be material
-                      color: Colors.deepPurple,
+                      color: context.theme.buttonColor,
                       borderRadius:
                           BorderRadius.circular(changeButton ? 50 : 8),
                       child: InkWell(
                         //InkWell works like container but gives effect
-                        onTap: () =>moveToHome(context),
+                        onTap: () => moveToHome(context),
                         child: AnimatedContainer(
-                          //child should not have any decoration property only ancestor should have
+                          //child should not have any decoration property, only ancestor should have
                           duration: Duration(seconds: 1),
                           height: 50,
                           width: changeButton

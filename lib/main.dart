@@ -15,18 +15,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //context specify location of each widget in widget tree
     return MaterialApp(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: MyTheme.lighttheme(context),
-      darkTheme: MyTheme.lighttheme(context),
+      darkTheme: MyTheme.darktheme(context),
       debugShowCheckedModeBanner: false,
       initialRoute:
-          "/home", //this is the 1st route we want to show on screen when app opens
+          "/login", //this is the 1st route we want to show on screen when app opens
       routes: {
         "/": (context) => LoginPage(), //by default initial route is "/"
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.CartRoute: (context) => CartPage(),
-      }, 
+      },
     );
   }
 }
