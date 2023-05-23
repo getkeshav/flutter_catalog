@@ -13,6 +13,7 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       bottomNavigationBar: Container(
         color: Colors.white,
         child: ButtonBar(
@@ -23,18 +24,18 @@ class HomeDetailPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                    MyTheme.darkBluishColor,
-                  ),
-                  shape: MaterialStateProperty.all(
-                    StadiumBorder(),
-                  )),
-              child: "Buy".text.xl.make(),
-            ).wh(100, 50)
+                backgroundColor:
+                    MaterialStateProperty.all(MyTheme.darkBluishColor),
+                shape: MaterialStateProperty.all(StadiumBorder()),
+              ),
+              child: "Add to cart".text.xl.make(),
+            ).wh(125, 50)
           ],
         ).pOnly(right: 8.0).py32(),
       ),
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
       backgroundColor: MyTheme.creamColor,
       body: SafeArea(
         bottom: false,
@@ -48,26 +49,32 @@ class HomeDetailPage extends StatelessWidget {
               ),
             ).h32(context),
             Expanded(
-                child: VxArc(
-                    height: 30.0,
-                    arcType: VxArcType.CONVEY,
-                    edge: VxEdge.TOP,
-                    child: Container(
-                      color: Colors.white,
-                      width: context.screenWidth,
-                      child: Column(
-                        children: [
-                          catalog.name.text.xl4
-                              .color(MyTheme.darkBluishColor)
-                              .bold
-                              .make(),
-                          catalog.desc.text.xl
-                              .textStyle(context.captionStyle)
-                              .make(),
-                          10.heightBox
-                        ],
-                      ).py64(),
-                    )))
+              child: VxArc(
+                  height: 30.0,
+                  arcType: VxArcType.CONVEY,
+                  edge: VxEdge.TOP,
+                  child: Container(
+                    color: Colors.white,
+                    width: context.screenWidth,
+                    child: Column(
+                      children: [
+                        catalog.name.text.xl4
+                            .color(MyTheme.darkBluishColor)
+                            .bold
+                            .make(),
+                        catalog.desc.text.xl
+                            .textStyle(context.captionStyle)
+                            .make(),
+                        10.heightBox,
+                        "Sit nam minus. Ut voluptatum fugiat accusantium deserunt velit velit hic ut. Animi reprehenderit magnam unde beatae quisquam odit. Repellat repellat beatae voluptatem name."
+                            .text
+                            .textStyle(context.captionStyle)
+                            .make()
+                            .p8(),
+                      ],
+                    ).py64(),
+                  )),
+            )
           ],
         ),
       ),
