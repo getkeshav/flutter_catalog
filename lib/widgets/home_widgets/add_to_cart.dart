@@ -5,23 +5,18 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../models/cart.dart';
 import '../../models/catalog.dart';
 
-class AddToCart extends StatefulWidget {
+class AddToCart extends StatelessWidget {
   final Item catalog;
-  const AddToCart({
+   AddToCart({
     super.key,
     required this.catalog,
   });
 
-  @override
-  State<AddToCart> createState() => _AddToCartState();
-}
-
-class _AddToCartState extends State<AddToCart> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     bool isInCart = _cart.items
-            .contains(widget.catalog) ?? // at start isInCart will be false
+            .contains(catalog) ?? // at start isInCart will be false
         false; //if current item is in the cart then isInCart will be true, tick mark will be preserved otherwise not
     return ElevatedButton(
       onPressed: () {
@@ -31,8 +26,8 @@ class _AddToCartState extends State<AddToCart> {
           final _catalog =
               CatalogModel(); //singleten fn is used here so that new value of _catalog and _cart is not initialised again and again.
           _cart.catalog = _catalog;
-          _cart.add(widget.catalog);
-          setState(() {});
+          _cart.add(catalog);
+          // setState(() {});
         }
       },
       style: ButtonStyle(

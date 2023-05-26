@@ -1,12 +1,7 @@
 import 'package:flutter_application_1/models/catalog.dart';
 
 class CartModel {
-  //singleten class
-  static final cartModel = CartModel._internal();
-  CartModel._internal();
-  factory CartModel() =>
-      cartModel; // this class will ensure calling of fn once so that it is not again and agian initialized
-  //catalog field
+  // //catalog field
   late CatalogModel _catalog;
   // Collection of IDs - store Ids of each item
   final List<int> _itemIds = [];
