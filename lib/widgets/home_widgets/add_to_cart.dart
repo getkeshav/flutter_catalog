@@ -15,7 +15,10 @@ class AddToCart extends StatelessWidget {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    VxState.watch(context, on: [AddMutation]);
+    VxState.watch(context, on: [ // VxState.listen redrawes the whole widget tree
+      AddMutation,
+      RemoveMutation
+    ]); // whenever AddMutation is called widget needs to be redrawen.
     final CartModel _cart = (VxState.store as MyStore).cart;
     bool isInCart = _cart.items
             .contains(catalog) ?? // at start isInCart will be false
@@ -24,9 +27,7 @@ class AddToCart extends StatelessWidget {
       onPressed: () {
         if (!isInCart) {
           // so that no items are repeated in cart, items will not be put in the cart if it is already present
-
           AddMutation(catalog);
-          // setState(() {});
         }
       },
       style: ButtonStyle(
